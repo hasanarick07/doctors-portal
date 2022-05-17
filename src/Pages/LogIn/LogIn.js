@@ -1,16 +1,49 @@
-import React from "react";
+import React, { useEffect } from "react";
 import auth from "../../firebase.init";
-import { useSignInWithGoogle } from "react-firebase-hooks/auth";
+import {
+  useSignInWithEmailAndPassword,
+  useSignInWithGoogle,
+} from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import Loading from "../Shared/Loading/Loading";
 
 const LogIn = () => {
-  const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+  const [signInWithGoogle, googleUser, googleLoading, googleError] =
+    useSignInWithGoogle(auth);
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const onSubmit = data => console.log(data);
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
+  let signInError;
+  const navigate = useNavigate();
+  const location = useLocation();
+  let from = location.state?.from?.pathname || "/";
+
+  useEffect(() => {
+    if (user || googleUser) {
+      navigate(from, { replace: true });
+    }
+  }, [user, googleUser, from, navigate]);
+
+  if (loading || googleLoading) {
+    return <Loading></Loading>;
+  }
+
+  if (error || googleError) {
+    signInError = (
+      <p className="text-red-500">
+        <small>{error?.message || googleUser?.message}</small>
+      </p>
+    );
+  }
+  const onSubmit = data => {
+    console.log(data);
+    signInWithEmailAndPassword(data.email, data.password);
+  };
   return (
     <div className="flex h-[80vh] justify-center items-center text-black text-center">
       <div class="card md:w-96 bg-base-100 shadow-xl">
@@ -78,12 +111,14 @@ const LogIn = () => {
                 )}
               </label>
             </div>
+            {signInError}
             <input
               type="submit"
               value="Submit"
               class="btn  btn-accent hover:text-white w-full max-w-xs"
             />
           </form>
+          <p><small>New to Doctors Portal <Link className='text-primary' to="/signup">Create New Account</Link></small></p>
           <div class="divider m-0 text-black">OR</div>
           <button
             onClick={() => signInWithGoogle()}
