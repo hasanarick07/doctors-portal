@@ -5,7 +5,12 @@ import toast from "react-hot-toast";
 import auth from "../../firebase.init";
 import Loading from "../Shared/Loading/Loading";
 
-const BookingModal = ({ bookAppointment, date, setBookAppointment }) => {
+const BookingModal = ({
+  bookAppointment,
+  date,
+  setBookAppointment,
+  refetch,
+}) => {
   const [user, loading] = useAuthState(auth);
   if (loading) {
     return <Loading></Loading>;
@@ -42,8 +47,9 @@ const BookingModal = ({ bookAppointment, date, setBookAppointment }) => {
             `Already have an appointment on ${data?.booking?.date} at ${data?.booking?.slot}`
           );
         }
+        refetch();
         setBookAppointment(null);
-        console.log(data);
+        // console.log(data);
       });
   };
   return (
@@ -64,7 +70,7 @@ const BookingModal = ({ bookAppointment, date, setBookAppointment }) => {
           >
             <input
               type="text"
-              value={format(date, "PP")}
+              value={format(date, "PPP")}
               class="input input-ghost bg-white input-accent w-full max-w-xs"
             />
 
