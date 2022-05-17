@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import toast from "react-hot-toast";
 import auth from "../../firebase.init";
 import Loading from "../Shared/Loading/Loading";
 
@@ -9,13 +10,41 @@ const BookingModal = ({ bookAppointment, date, setBookAppointment }) => {
   if (loading) {
     return <Loading></Loading>;
   }
-  const { name, slots } = bookAppointment;
+  const { _id, name, slots } = bookAppointment;
+  const formattedDate = format(date, "PPP");
   console.log(bookAppointment);
   const bookingSubmit = e => {
     e.preventDefault();
     const slot = e.target.slot.value;
     console.log(slot);
-    setBookAppointment(null);
+    const booking = {
+      bookAppointmentId: _id,
+      bookAppointment: name,
+      date: formattedDate,
+      slot,
+      patient: user?.email,
+      patientName: user?.displayName,
+      phone: e.target.phone.value,
+    };
+    fetch("http://localhost:5000/booking", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(booking),
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data?.success) {
+          toast.success(`Appointment is set, ${formattedDate} at ${slot} `);
+        } else {
+          toast.error(
+            `Already have an appointment on ${data?.booking?.date} at ${data?.booking?.slot}`
+          );
+        }
+        setBookAppointment(null);
+        console.log(data);
+      });
   };
   return (
     <div className="text-black">
@@ -49,12 +78,13 @@ const BookingModal = ({ bookAppointment, date, setBookAppointment }) => {
             <input
               name="name"
               type="text"
-              value={user?.displayName || ''} 
+              value={user?.displayName || ""}
               placeholder="Your Name"
               class="input input-ghost input-accent w-full max-w-xs"
             />
             <input
-              type="email" value={user?.email || ''}
+              type="email"
+              value={user?.email || ""}
               name="email"
               placeholder="Your Email"
               class="input input-ghost input-accent w-full max-w-xs"
