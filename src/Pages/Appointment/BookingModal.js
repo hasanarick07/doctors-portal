@@ -1,7 +1,14 @@
 import { format } from "date-fns";
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
+import Loading from "../Shared/Loading/Loading";
 
 const BookingModal = ({ bookAppointment, date, setBookAppointment }) => {
+  const [user, loading] = useAuthState(auth);
+  if (loading) {
+    return <Loading></Loading>;
+  }
   const { name, slots } = bookAppointment;
   console.log(bookAppointment);
   const bookingSubmit = e => {
@@ -42,11 +49,12 @@ const BookingModal = ({ bookAppointment, date, setBookAppointment }) => {
             <input
               name="name"
               type="text"
+              value={user?.displayName || ''} 
               placeholder="Your Name"
               class="input input-ghost input-accent w-full max-w-xs"
             />
             <input
-              type="email"
+              type="email" value={user?.email || ''}
               name="email"
               placeholder="Your Email"
               class="input input-ghost input-accent w-full max-w-xs"
