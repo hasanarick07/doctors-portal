@@ -17,7 +17,7 @@ const BookingModal = ({
   }
   const { _id, name, slots } = bookAppointment;
   const formattedDate = format(date, "PPP");
-  console.log(bookAppointment);
+  // console.log(bookAppointment);
   const bookingSubmit = e => {
     e.preventDefault();
     const slot = e.target.slot.value;
@@ -71,11 +71,12 @@ const BookingModal = ({
             <input
               type="text"
               value={format(date, "PPP")}
+              readOnly
               class="input input-ghost bg-white input-accent w-full max-w-xs"
             />
 
             <div class="form-control w-full max-w-xs">
-              <select name="slot" class="select select-accent">
+              <select name="slot" readOnly class="select select-accent">
                 {slots?.map(slot => (
                   <option value={slot}>{slot}</option>
                 ))}
@@ -84,12 +85,14 @@ const BookingModal = ({
             <input
               name="name"
               type="text"
+              readOnly
               value={user?.displayName || ""}
               placeholder="Your Name"
               class="input input-ghost input-accent w-full max-w-xs"
             />
             <input
               type="email"
+              readOnly
               value={user?.email || ""}
               name="email"
               placeholder="Your Email"

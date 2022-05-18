@@ -7,6 +7,7 @@ import {
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Loading from "../Shared/Loading/Loading";
+import useToken from "../hooks/useToken";
 
 const LogIn = () => {
   const [signInWithGoogle, googleUser, googleLoading, googleError] =
@@ -22,12 +23,13 @@ const LogIn = () => {
   const navigate = useNavigate();
   const location = useLocation();
   let from = location.state?.from?.pathname || "/";
+  const [token] = useToken(user || googleUser);
 
   useEffect(() => {
-    if (user || googleUser) {
+    if (token) {
       navigate(from, { replace: true });
     }
-  }, [user, googleUser, from, navigate]);
+  }, [token, from, navigate]);
 
   if (loading || googleLoading) {
     return <Loading></Loading>;
@@ -118,7 +120,14 @@ const LogIn = () => {
               class="btn  btn-accent hover:text-white w-full max-w-xs"
             />
           </form>
-          <p><small>New to Doctors Portal <Link className='text-primary' to="/signup">Create New Account</Link></small></p>
+          <p>
+            <small>
+              New to Doctors Portal{" "}
+              <Link className="text-primary" to="/signup">
+                Create New Account
+              </Link>
+            </small>
+          </p>
           <div class="divider m-0 text-black">OR</div>
           <button
             onClick={() => signInWithGoogle()}

@@ -6,8 +6,10 @@ import Appointment from "./Pages/Appointment/Appointment";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import MyAppointment from "./Pages/Dashboard/MyAppointment";
 import MyReview from "./Pages/Dashboard/MyReview";
+import Users from "./Pages/Dashboard/Users";
 import Home from "./Pages/Home/Home";
 import LogIn from "./Pages/LogIn/LogIn";
+import RequireAdmin from "./Pages/LogIn/RequireAdmin";
 import RequireAuth from "./Pages/LogIn/RequireAuth";
 import SignUp from "./Pages/LogIn/SignUp";
 import Footer from "./Pages/Shared/Footer/Footer";
@@ -39,6 +41,14 @@ function App() {
         >
           <Route index element={<MyAppointment />}></Route>
           <Route path="review" element={<MyReview />}></Route>
+          <Route
+            path="users"
+            element={
+              <RequireAdmin>
+                <Users />
+              </RequireAdmin>
+            }
+          ></Route>
         </Route>
         <Route path="/login" element={<LogIn />}></Route>
         <Route path="/signup" element={<SignUp />}></Route>
