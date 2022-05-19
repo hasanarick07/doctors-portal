@@ -31,7 +31,11 @@ const Navbar = () => {
       <li>{user && <Link to="/dashboard">Dashboard</Link>}</li>
       <li>
         {user ? (
-          <button className="btn btn-ghost" onClick={logout}>
+          <button
+            className="btn btn-ghost tooltip tooltip-left tooltip-accent  bg-gradient-to-r from-secondary to-primary"
+            onClick={logout}
+            data-tip={user?.email}
+          >
             Sign Out
           </button>
         ) : (
