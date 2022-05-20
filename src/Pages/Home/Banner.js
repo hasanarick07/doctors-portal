@@ -7,18 +7,18 @@ const Banner = () => {
   return (
     <div>
       <div
-        class="hero min-h-screen text-black"
+        className="hero min-h-screen text-black"
         style={{ backgroundImage: `url(${bgImage})`, height: "600px" }}
       >
-        <div class="hero-content flex-col lg:flex-row-reverse">
+        <div className="hero-content flex-col lg:flex-row-reverse">
           <img
             src={bannerImage}
             alt=""
-            class="md:w-1/2 rounded-lg shadow-2xl"
+            className="md:w-1/2 rounded-lg shadow-2xl"
           />
           <div className=" basis-1/2">
-            <h1 class="text-5xl font-bold">Your New Smile Starts Here</h1>
-            <p class="py-6">
+            <h1 className="text-5xl font-bold">Your New Smile Starts Here</h1>
+            <p className="py-6">
               Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
               excepturi exercitationem quasi. In deleniti eaque aut repudiandae
               et a id nisi.

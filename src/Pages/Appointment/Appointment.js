@@ -4,10 +4,11 @@ import AvailableAppointment from './AvailableAppointment';
 
 const Appointment = () => {
     const [date, setDate] = useState(new Date());
+    const newDate = date ? date : new Date();
     return (
         <div>
-           <AppointmentBanner date={date} setDate={setDate} /> 
-           <AvailableAppointment  date={date}/>
+           <AppointmentBanner date={newDate} setDate={setDate} /> 
+           <AvailableAppointment  date={newDate}/>
         </div>
     );
 };

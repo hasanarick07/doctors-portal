@@ -4,8 +4,8 @@ import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 const AppointmentBanner = ({ date, setDate }) => {
   return (
-    <div class="hero min-h-screen text-black">
-      <div class="hero-content flex-col lg:flex-row-reverse justify-evenly">
+    <div className="hero min-h-screen text-black">
+      <div className="hero-content flex-col lg:flex-row-reverse justify-evenly">
         <img className=" md:w-1/2" src={bannerImage} alt="" />
         <div>
           <DayPicker mode="single" selected={date} onSelect={setDate} />

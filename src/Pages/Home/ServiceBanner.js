@@ -5,12 +5,12 @@ import GradientButton from "../Shared/GradientButton";
 const ServiceBanner = () => {
   return (
     <div>
-      <div class="card md:card-side text-black p-10 md:p-0 md:mt-32">
+      <div className="card md:card-side text-black p-10 md:p-0 md:mt-32">
         <figure className=" h-1/4 basis-1/2">
           <img className="md:w-2/3 rounded-2xl" src={treatment} alt="Movie" />
         </figure>
-        <div class="card-body basis-1/2	md:py-32">
-          <h2 class="card-title text-5xl font-bold">
+        <div className="card-body basis-1/2	md:py-32">
+          <h2 className="card-title text-5xl font-bold">
             Exceptional Dental Care, on Your Terms
           </h2>
           <p>
@@ -21,7 +21,7 @@ const ServiceBanner = () => {
             here', making it look like readable English. Many desktop publishing
             packages and web page
           </p>
-          <div class="card-actions justify-start">
+          <div className="card-actions justify-start">
             <GradientButton>GET STARTED</GradientButton>
           </div>
         </div>

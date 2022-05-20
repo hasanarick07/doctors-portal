@@ -54,16 +54,18 @@ const BookingModal = ({
   };
   return (
     <div className="text-black">
-      <input type="checkbox" id="my-modal-6" class="modal-toggle " />
-      <div class="modal modal-bottom sm:modal-middle">
-        <div class="modal-box">
+      <input type="checkbox" id="my-modal-6" className="modal-toggle " />
+      <div className="modal modal-bottom sm:modal-middle">
+        <div className="modal-box">
           <label
-            for="my-modal-6"
-            class="btn text-black btn-sm btn-circle absolute right-2 top-2 hover:bg-gradient-to-r from-secondary to-primary"
+            htmlFor="my-modal-6"
+            className="btn text-black btn-sm btn-circle absolute right-2 top-2 hover:bg-gradient-to-r from-secondary to-primary"
           >
             ✕
           </label>
-          <h3 class="font-bold text-lg text-secondary">Booking For : {name}</h3>
+          <h3 className="font-bold text-lg text-secondary">
+            Booking For : {name}
+          </h3>
           <form
             onSubmit={bookingSubmit}
             className="grid grid-cols-1 justify-items-center gap-3 text-black modal-action"
@@ -72,11 +74,11 @@ const BookingModal = ({
               type="text"
               value={format(date, "PPP")}
               readOnly
-              class="input input-ghost bg-white input-accent w-full max-w-xs"
+              className="input input-ghost bg-white input-accent w-full max-w-xs"
             />
 
-            <div class="form-control w-full max-w-xs">
-              <select name="slot" readOnly class="select select-accent">
+            <div className="form-control w-full max-w-xs">
+              <select name="slot" readOnly className="select select-accent">
                 {slots?.map(slot => (
                   <option value={slot}>{slot}</option>
                 ))}
@@ -88,7 +90,7 @@ const BookingModal = ({
               readOnly
               value={user?.displayName || ""}
               placeholder="Your Name"
-              class="input input-ghost input-accent w-full max-w-xs"
+              className="input input-ghost input-accent w-full max-w-xs"
             />
             <input
               type="email"
@@ -96,17 +98,17 @@ const BookingModal = ({
               value={user?.email || ""}
               name="email"
               placeholder="Your Email"
-              class="input input-ghost input-accent w-full max-w-xs"
+              className="input input-ghost input-accent w-full max-w-xs"
             />
             <input
               type="number"
               name="phone"
               placeholder="Your Phone Number"
-              class="input input-ghost input-accent w-full max-w-xs"
+              className="input input-ghost input-accent w-full max-w-xs"
             />
             <input
               type="submit"
-              class="my-modal-6 btn btn-primary w-full max-w-xs text-white bg-gradient-to-r from-secondary to-primary"
+              className="my-modal-6 btn btn-primary w-full max-w-xs text-white bg-gradient-to-r from-secondary to-primary"
               value="Submit"
             />
           </form>

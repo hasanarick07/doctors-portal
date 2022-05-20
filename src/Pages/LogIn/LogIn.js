@@ -48,13 +48,13 @@ const LogIn = () => {
   };
   return (
     <div className="flex h-[80vh] justify-center items-center text-black text-center">
-      <div class="card md:w-96 bg-base-100 shadow-xl">
-        <div class="card-body">
-          <h2 class="text-4xl font-bold">Login</h2>
+      <div className="card md:w-96 bg-base-100 shadow-xl">
+        <div className="card-body">
+          <h2 className="text-4xl font-bold">Login</h2>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div class="form-control w-full max-w-xs">
-              <label class="label">
-                <span class="label-text text-black">Email</span>
+            <div className="form-control w-full max-w-xs">
+              <label className="label">
+                <span className="label-text text-black">Email</span>
               </label>
               <input
                 {...register("email", {
@@ -66,7 +66,7 @@ const LogIn = () => {
                 })}
                 type="text"
                 placeholder="Your Email"
-                class="input input-ghost bg-white input-accent w-full max-w-xs "
+                className="input input-ghost bg-white input-accent w-full max-w-xs "
               />
               <label className="label p-0">
                 {errors.email?.type === "required" && (
@@ -117,7 +117,7 @@ const LogIn = () => {
             <input
               type="submit"
               value="Submit"
-              class="btn  btn-accent hover:text-white w-full max-w-xs"
+              className="btn  btn-accent hover:text-white w-full max-w-xs"
             />
           </form>
           <p>
@@ -128,10 +128,10 @@ const LogIn = () => {
               </Link>
             </small>
           </p>
-          <div class="divider m-0 text-black">OR</div>
+          <div className="divider m-0 text-black">OR</div>
           <button
             onClick={() => signInWithGoogle()}
-            class="btn btn-outline btn-accent hover:text-white w-full max-w-xs"
+            className="btn btn-outline btn-accent hover:text-white w-full max-w-xs"
           >
             Continue With Google
           </button>
